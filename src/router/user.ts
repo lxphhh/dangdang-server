@@ -21,4 +21,4 @@ interface UserInfo {
   age: number
 }
 
-export default router
+module.exports = router
