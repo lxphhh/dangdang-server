@@ -1,3 +1,4 @@
+import { success } from '../common/ResResult'
 import { Context } from 'koa'
 import Router from 'koa-router'
 
@@ -7,7 +8,7 @@ router.prefix('/usermodule')
 
 router.get('/findUserinfo/:username', async (ctx: Context) => {
   const { username } = ctx.params
-  ctx.body = `${username} 欢迎你`
+  ctx.body = success(`${username} 欢迎你`)
 })
 
 router.post('/addUser', async (ctx: Context) => {
