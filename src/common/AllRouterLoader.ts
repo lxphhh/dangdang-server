@@ -1,9 +1,21 @@
 import path from 'path'
 import fs from 'fs'
 import Router from 'koa-router'
-import Koa from 'koa'
+import Koa, { Context } from 'koa'
 import json from 'koa-json'
 import body from 'koa-body'
+import globalException from './GlobalException'
+
+// const middleware1 = async (ctx: Context, next: Koa.Next) => {
+//   console.log('第一个中间件开始....')
+//   await next()
+//   console.log('第一个中间件结束....')
+// }
+// const middleware2 = async (ctx: Context, next: Koa.Next) => {
+//   console.log('第二个中间件开始....')
+//   await next()
+//   console.log('第二个中间件结束....')
+// }
 
 /**
  * @description: 用于自动加载路由(单例)
@@ -19,6 +31,8 @@ class AllRouterLoader {
   init(app: Koa) {
     this.app = app // koa实例
     const rootRouter = this.loadAppRouterWrapper()
+    // 全局异常处理,任何请求过来先错误中间件,再路由
+    this.app.use(globalException)
     this.app.use(rootRouter.routes())
     // 4.监听
     this.listen()
