@@ -9,6 +9,7 @@ const router = new Router()
 
 router.prefix('/usermodule')
 
+// http://localhost:3002/dang/usermodule/findUserinfo/admin/123
 router.get('/findUserinfo/:username/:psw', async (ctx: Context) => {
   const { username, psw } = ctx.params
   console.log('执行路由请求findUserinfo开始....')

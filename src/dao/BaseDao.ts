@@ -9,8 +9,9 @@ class BaseDao {
   }
 
   async connect() {
+    // 连接方法
     this.config = await mysql.createConnection(dBconfig.getConfig())
-    console.log('this.config', this.config)
+    // console.log('this.config', this.config)
   }
 
   async query<T>(sql: string) {
